@@ -1,0 +1,69 @@
+<style>
+.margin-bottom-10 {
+    width: 16.66666667%;
+    margin-bottom: 10px;
+}
+.loadinggif {
+    background:url('http://www.hsi.com.hk/HSI-Net/pages/images/en/share/ajax-loader.gif') no-repeat right center !important;
+}
+    </style>
+<div class='content-wrapper ' >
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content ">
+                             
+                            <div class="row">
+                                   <br>
+                                  <div class="col-lg-12 form-group">
+                                        <button class="btn pull-right" ng-click="addMoreColor()">Add Category</button>
+                                        </div>
+                                
+                                   <div id="menu1" class="">
+                                        <div class="row imagediv box" ng-repeat="product_color in product_colors">
+                                            <div class="col-lg-12 form-group hed">
+                                               
+                                                <div class="col-lg-4">
+
+                                                    <input placeholder="Category name" type="text" ng-blur="saveCat(product_color)" id="name_{{product_color.uniqid}}" ng-model="product_color.color" name="colors" class="form-control product_box">
+                                                         
+                                                    
+                                                    <i style="color: red;"> {{product_color.error}} </i>
+                                                </div>
+                                                <div class="col-lg-2 pull-right">
+                                                    <button class="btn btn-danger" ng-click="removeColor(product_color)" style="width:100%;">Remove</button>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-lg-12 form-group" ng-show="product_color.color!=0">
+                                                <div class="col-lg-2 col-sm-4 margin-bottom-10" ng-repeat="image in product_color.images">
+                                                    <div class="">
+                                                        <img src="{{image.image}}" class="img-thumbnail image" style="height: 150px;width: 150px;">
+                                                        
+                                                    </div>
+                                                    <a href="javascript:void(0)" ng-click="removeImage(product_color,image)"> <i class="fa fa-trash dltn"></i></a>
+                                                   
+                                                </div>
+                                                <div class="col-lg-2 col-sm-4  margin-bottom-10">
+                                                    <div class="dropzone" options="product_color" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-lg-12 form-group hide" >
+                                        <button class="btn pull-right" ng-click="addMoreColor()">Add Category</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

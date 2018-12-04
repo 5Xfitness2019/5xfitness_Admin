@@ -1,0 +1,30 @@
+<!-- SIDEBAR - START -->
+<!-- MAIN MENU - START -->
+<perfect-scrollbar class="page-sidebar-wrapper" id="main-menu-wrapper" wheel-propagation="true" suppress-scroll-x="true" min-scrollbar-length="20" menuheight>
+    <!-- USER INFO - START -->
+    <div class="profile-info" ng-show="app.settings.menuProfile">
+        <div class="profile-image col-md-12 col-sm-12 col-xs-12 text-center">
+            <a ui-sref="app.mus-user-profile">
+                       <img ng-cloak ng-src="img/admin.png" class="img-responsive">
+                <span class="profile-status available"></span>
+            </a>
+        </div>
+        <div class="profile-details col-md-12 col-sm-12 col-xs-12">
+                <h3>
+                    <a ui-sref="app.ui.profile"> {{loggedUserInfo.user.first_name}} {{loggedUserInfo.user.last_name}}</a>
+
+                    <!-- Available statuses: online, idle, busy, away and offline -->
+                </h3>
+            <p class="profile-title">Administrator</p>
+        </div>
+    </div>
+    <!-- USER INFO - END -->
+    <!-- nav -->
+
+    <nav ui-nav ng-include="'partials/components/nav.blog.html'"></nav>
+
+    <!-- nav -->
+ 
+</perfect-scrollbar>
+<!-- MAIN MENU - END -->
+<!--  SIDEBAR - END -->

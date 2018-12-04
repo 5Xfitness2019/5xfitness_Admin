@@ -1,0 +1,176 @@
+<div class='content-wrapper' ng-controller="WorkoutCtrl" ng-init="app.settings.pagetitle = 'Workout Details';getWorkoutdetails();getCategories();getSubCategories();">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                                    
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-info saveBtn" ng-click="saveWorkout()">Save</button>
+                                        <button type="button" ng-click="goback('app.workouts')" class="btn">Back</button>
+                                    </div>
+                                    <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                        ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                        <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                        <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <br>
+                            <h3>Workout Details:</h3>
+                            <hr>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <label>Category</label>
+                                    <div class="form-group">
+                                        <select class="" ng-model="details.category_id"  style="width:100%;" ng-change="getSubCategory(details.category_id)">
+                                            <option value="">Select Category</option>
+                                            <option ng-repeat="prop in categories" value="{{prop.category_id}}">{{prop.category_name}}</option>
+                                        </select>  
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Sub Category </label>
+                                    <div class="form-group">
+                                        <select class="" ng-model="details.subcategory_id"  style="width:100%;">
+                                            <option value="">Select Sub Category</option>
+                                            <option ng-repeat="prop in subcategories" value="{{prop.sub_category_id}}">{{prop.sub_category_name}}</option>
+                                        </select>  
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row margin-top-10">
+                                    
+                                <div class="col-md-6">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Workout Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="workout_name" name="workout_name" ng-model="details.workout_name" value="{{details.workout_name}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Sets( In No's)</label>
+                                        <div class="form-group">
+                                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min="0" class="form-control" id="duration" name="duration" ng-model="details.duration" value="{{details.duration}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-3">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Weight(In lbs)</label>
+                                        <div class="form-group">
+                                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min="0" class="form-control" id="weight" name="weight" ng-model="details.weight" value="{{details.weight}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                               
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-3">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Rest(In minutes)</label>
+                                        <div class="form-group">
+                                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min="0" class="form-control" id="rest" name="rest" ng-model="details.rest" value="{{details.rest}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-3">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Rest(In Sec)</label>
+                                        <div class="form-group">
+                                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min="0" class="form-control" id="rest_sec" name="rest_sec" ng-model="details.rest_sec" value="{{details.rest_sec}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <md-input-container style="margin:27px 0;width:100%;">
+                                        <label>Reps(In No's) </label>
+                                        <div class="form-group">
+                                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min="0" class="form-control" id="repeat_times" name="repeat_times" ng-model="details.repeat_times" value="{{details.repeat_times}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <label>Video</label>
+                                    <div class="form-group">
+                                            <input type="file" ngf-select ng-model="file" name="file" accept="video/mp4" ngf-max-size="100MB" id="uploadFiles" style="display: none;"/>
+    
+                                            <!-- <input type="file" name="file" file-model="myFile" id="uploadFiles" style="display: none;" accept="video/*"/> -->
+                                            <button id="uploadButton1" onclick="javascript: document.getElementById('uploadFiles').click()" class="btn btn-primary btn-bok btn-sm" >Upload Video</button> {{file.name}}
+                                            {{errorMsg1}}
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-3" ng-if="details.video_url">
+                                        <video width="150" controls>
+                                            <source ng-src="{{getIframeSrc(details.video_url)}}" type="video/mp4">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row margin-top-10">
+                                    <!-- <label></label>
+                                    <div class="form-group">
+                                        <input type="file" name="file" id="uploadFilesPDF" onchange="angular.element(this).scope().uploadPropertyImage(this)"  style="display: none;"/>
+                                        <button id="uploadButton1" onclick="javascript: document.getElementById('uploadFilesPDF').click()" class="btn btn-primary btn-bok btn-sm" >Upload Property Image</button>
+                                        {{errorMsg1}}
+                                    </div> -->
+                                    <div class="col-md-6">
+                                        <div>Workout Image:  </div>
+                                        <div>
+                                                <input type="file" name="file" id="fileInput" style="display: none;" accept="image/*"/>
+                                                <button id="uploadButton2" onclick="javascript: document.getElementById('fileInput').click()" class="btn btn-primary btn-bok btn-sm" >Upload Image</button>
+                                        </div>
+                                        <div class="cropArea" ng-show="myImage!=''">
+                                            <img-crop image="myImage" result-image="myCroppedImage" aspect-ratio="1.70" result-image-size='[{w: 500,h: 300}]' area-type="rectangle" result-image-quality="1.0"></img-crop>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!-- <label>Select Topic Image: </label> -->
+                                        <img src="{{apiUrl}}{{details.image_url}}" style="width:100px;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>Cropped Image:</div>
+                                        <div>
+                                            <img src="{{myCroppedImage}}" />
+                                        </div>
+                                    </div>
+                               
+                            </div>
+                            
+
+                            <div class="clearfix"></div>
+
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

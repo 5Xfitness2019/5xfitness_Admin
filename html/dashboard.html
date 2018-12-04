@@ -1,0 +1,202 @@
+
+<div class='content-wrapper' ng-controller="DashboardCtrl"  ng-init="app.settings.pagetitle = 'Dashboard'; getDashboard() ">
+
+            <div class="row" >
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/users">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-users fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    User Management
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{counts.user_count}}
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <a href="#/app/users" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/chatroom">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-bell fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Chat Room Management
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    <!-- {{counts.category_count}} -->0
+                                </div>
+                                <a href="#/app/chatroom" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/subscriptions">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-money fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    User Subscriptions
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    <!-- {{counts.user_count}} -->0
+                                </div>
+                                <a href="#/app/subscriptions" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/workouts">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-users fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Workout Plan Management
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{counts.workout_count}} 
+                                <span id="sparklineA"></span>
+                                </div>
+                                <a href="#/app/workouts" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row" >
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/chatroom">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-tasks fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    CMS
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{count}}
+                                    <span id="sparklineB"></span>
+                                </div>
+                                <a href="#/app/chatroom" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="circle-tile">
+                            <a href="#/app/settings">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-users fa-fw fa-3x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Settings
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{counts.setting_count}} 
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <a href="#/app/settings" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                
+                </div> -->
+                
+
+<style>
+    .tile-stats {
+    position: relative;
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #E4E4E4;
+    -webkit-border-radius: 5px;
+    overflow: hidden;
+    padding-bottom: 5px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 5px;
+    -moz-background-clip: padding;
+    border-radius: 5px;
+    background: #FFF;
+    transition: all .3s ease-in-out;
+}
+.icon {
+    width: 20px;
+    height: 20px;
+    color: #BAB8B8;
+    position: absolute;
+    right: 53px;
+    top: 22px;
+    z-index: 1;
+}
+.tile-stats{
+    height:100px;
+}
+.tile-stats .count, .tile-stats h3, .tile-stats p {
+    position: relative;
+    margin: 0 0 0 10px;
+    z-index: 5;
+    padding: 0;
+}
+.tile-stats .count {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.65857;
+}
+.tile-stats h3 {
+    color: #BAB8B8;
+}
+.tile-stats .count, .tile-stats h3, .tile-stats p {
+    position: relative;
+    margin: 0 0 0 10px;
+    z-index: 5;
+    padding: 0;
+}
+.tile-stats p {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.tile-stats .icon i {
+    margin: 0;
+    font-size: 60px;
+    line-height: 0;
+    vertical-align: bottom;
+    padding: 0
+}
+
+.flipInY a{
+    text-decoration: none;
+    color: #757575;
+}
+.flipInY a:hover{
+    text-decoration: none;
+    color: red !important;
+}
+.flipInY a:hover h3,.flipInY a:hover .icon{
+    text-decoration: none;
+    color: red !important;
+}
+ 
+</style>

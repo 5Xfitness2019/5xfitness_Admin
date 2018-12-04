@@ -1,0 +1,86 @@
+<div class='content-wrapper' data-ng-controller="DoctorsCtrl" >
+
+
+   
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <section class="box ">
+             <header class="panel_header">
+                <h2 class="title pull-left">All Email List</h2>
+            </header>
+
+
+    <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-8 col-md-8 col-sm-9 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+
+            </div>
+            <div class="content-body padding-bottom-0">
+                <div class="">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                          <div class="col-lg-4">
+                                <md-input-container>
+                                <label>Search</label>
+                                <input ng-model="search" ng-keyup="getEmailList()">
+                                </md-input-container>                       
+                        </div>
+
+                           <div class="col-lg-4 pull-right hide">
+                   <a  ui-sref="app.subscription-details({ id: 0})"  class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-plus"></i>Add</a>
+                     </div>
+                    </div>
+                </div>
+                  
+
+
+
+
+
+
+
+
+            <div class="content-body padding-bottom-0">
+               
+          
+                <div class="row">
+                    <table class="table  table-bordered"
+                          <thead>
+                       
+                            <tr>
+                              
+                             <th  class="col-lg-1" style="width:0.1%" >Actions</th>        
+                                <th class="col-lg-4">Email Title</th>
+                                <th class="col-lg-4">Subject</th>
+                                 
+                            </tr>
+                    </thead>
+                    <tbody>
+                       
+                            <tr ng-repeat="item in email_list">
+                               
+                                  <td>
+                                    <div class="col-lg-12 manager-assign">
+                                        <a  ui-sref="app.email-details({ id:item.email_id})"    href="javascript:" title="activate"><i class="material-icons material-font">edit</i></a>
+                                    </div>
+                                </td>
+                           
+
+ 
+                                <td>{{item.email_title}}</td>
+                                <td>{{item.email_subject}}</td>
+                            
+                                
+                                     
+                            </tr>
+   <tr ng-show="validationError1">
+            <td colspan="3">                 
+                <p ng-show="validationError1">{{validationError1}}</p>
+                <p ng-show="successMsg1">{{successMsg1}}</p>
+            </td>
+
+   </tr>
+                    </tbody>
+                       
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class='content-wrapper' ng-controller="DoctorsCtrl" ng-init="app.settings.pagetitle = 'Email  Details'; getEmaildetails();">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-8 col-xs-12 padding-left-0">
+
+                        <div class="uprofile-content padding-top-30">
+
+                            <div class="row">
+
+
+                                <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9 padding-bottom-30 pull-right ">
+
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-primary" ng-click="updateEmailDetails($event)">Save</button>
+                                        <button type="button" ng-click="goback('app.email-list')" class="btn">Back</button>
+                                    </div>
+                                    <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                        ng-show="validationError1 || successMsg1">
+                                        <p class=" pull-right" ng-show="validationError1">{{validationError1}}</p>
+                                        <p class=" pull-right" ng-show="successMsg1">{{successMsg1}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <h3>{{emailinfo.email_subject}} Details:</h3>
+                            <hr>
+                            <div class="row margin-top-10">
+                                     <div class="col-md-4">
+                                    <md-input-container class="col-lg-12">
+
+                                        <label>Email key</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" ng-disabled="true" ng-model="emailinfo.email_name" value="{{emailinfo.email_name}}" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                 <div class="col-md-4">
+                                    <md-input-container class="col-lg-12">
+
+                                        <label>Email Title</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" ng-disabled="true" ng-model="emailinfo.email_title" value="{{emailinfo.email_title}}" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <md-input-container class="col-lg-12">
+
+                                        <label>Subject</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" ng-model="emailinfo.email_subject" value="{{emailinfo.email_subject}}" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                                <div class="col-md-12" >
+                                    <md-input-container class="col-lg-12" ng-show="emailinfo.push_messege !='' ">
+
+                                        <label>Push notification / Message</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" ng-model="emailinfo.push_messege" value="{{emailinfo.push_messege}}" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                     <div class="col-md-12">
+                                    <div ckeditor="options" ng-model="emailinfo.email_template" ready="onReady()"></div>
+                                        <br>  <br>  <br>  <br>
+                                </div>
+
+                                
+
+                                     
+                             
+
+                                <div class="clearfix"></div>
+                               
+ 
+
+ 
+
+                             
+
+ 
+
+                          
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+</div>

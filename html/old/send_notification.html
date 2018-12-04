@@ -1,0 +1,25 @@
+ 
+<div class='content-wrapper ' ng-controller="ProductsCtrl" ng-init="app.settings.pagetitle = 'Skidmoji Notification'; ">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                             
+                             <div class="col-lg-3">Message</div>
+                              <div class="col-lg-6">
+                                 <textarea  class="form-control product_box" ng-model="message" placeholder="Eg: New Updates available." ></textarea>
+                             </div>
+                              <div class="col-lg-3">
+                             
+                                <center> <button class="btn btn-success" ng-click="sendNotification()">Send</button> </center>
+                              </div>
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

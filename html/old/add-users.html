@@ -1,0 +1,189 @@
+<div class='content-wrapper' ng-controller="DoctorsCtrl" ng-init="app.settings.pagetitle = title;">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+                                <div class="thumbnail col-lg-3 hide">
+                                    {{userdetails.profile_img}}
+                                    <img width="100%" ng-if="userdetails.profile_img!=''" class="img-responsive" ng-src="{{apiUrl}}{{userdetails.profile_img}}"
+                                        alt="">
+                                    <img width="100%" ng-if="userdetails.profile_img==''" class="img-responsive" ng-src="{{apiUrl}}uploads/noimage.png" alt="">
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-info saveBtn" ng-click="addUser($event)" ng-if="currentRouteName != 'app.user_details'">Save</button>
+                                        <button type="button" class="btn btn-info saveBtn" ng-click="updateUser($event)" ng-if="currentRouteName == 'app.user_details'">Update</button>
+                                        <button type="button" ng-click="cancel()" class="btn">Back</button>
+                                    </div>
+                                    <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                        ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                        <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                        <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <br>
+                            <h3>Personal Information:</h3>
+                            <hr>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>First Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="first_name" name="first_name" ng-model="userdetails.first_name" value="{{userdetails.first_name}}"
+                                                autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Last Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="last_name" name="last_name" ng-model="userdetails.last_name" value="{{userdetails.last_name}}"
+                                                autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Email</label>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="email" name="email" ng-model="userdetails.email" value="{{userdetails.email}} "
+                                                ng-disabled="currentRouteName == 'app.user_details'" autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Address</label>
+                                        <div class="form-group">
+                                            <textarea type="text" class="form-control" id="address" name="address" ng-model="userdetails.address" value="{{userdetails.password}} "
+                                                autocomplete="off"></textarea>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>State</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="state" name="phone" ng-model="userdetails.state" value="{{userdetails.confirmpass}}"
+                                                autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Zipcode</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="email" name="email" ng-model="userdetails.zipcode" value="{{userdetails.password}} "
+                                                ng-keypress="onlyNumbers($event)" autocomplete="off">
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Password</label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="email" name="email" ng-model="userdetails.password" value="{{userdetails.password}} "
+                                                autocomplete="off">
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Confirm Password</label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="phone" name="phone" ng-model="userdetails.confirmpass" value="{{userdetails.confirmpass}}"
+                                                autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10" ng-if="currentRouteName=='app.addStaff' || userdetails.member_type==2 ">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Field of Expertise</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="expertise_in" name="expertise_in" ng-model="userdetails.expertise_in" value="{{userdetails.expertise_in}}"
+                                                autocomplete="off" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10" ng-show="currentRouteName=='app.addOwner' || userdetails.member_type == 3" ng-init="getPropertyLists()">
+
+
+
+
+                                
+                                <div class="md-padding" ng-cloak>
+                                    <div>
+                                        <div layout="row">
+
+                                            <md-input-container>
+                                                <label>Owner Property</label>
+                                                <md-select ng-model="ownerPropertyList" multiple>
+                                                    <md-optgroup label="Property">
+                                                        <md-option ng-value="property.property_id" ng-repeat="property in property_list">{{property.property_name}}</md-option>
+                                                    </md-optgroup>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="row margin-top-10">
+                                <div class="col-md-6">-->
+                            <!--<md-input-container>-->
+                            <!--<label>Type of Property</label>
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="userdetails.propertyType" ng-change="getSubPropertyTypes($event,userdetails.propertyType);" >
+                                            <option value="">--Select--</option>
+                                            <option ng-repeat="prop in 
+                                            PropertyTypes" value="{{prop.property_id}}">{{prop.property_type}}</option>
+                                        </select>  
+                                    </div>-->
+                            <!--</md-input-container>-->
+                            <!--</div>
+                                <div class="col-md-6">-->
+                            <!--<md-input-container>-->
+                            <!--<label></label>
+                                     <div class="form-group">
+                                        <select class="form-control" ng-model="userdetails.subPropertyType">
+                                            <option value="">--Select--</option>
+                                            <option ng-repeat="prop in 
+                                            subPropertyTypes" value="{{prop.subProperty_id}}">{{prop.subProperty_type}}</option>
+                                        </select>  
+                                    </div>-->
+                            <!--</md-input-container>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

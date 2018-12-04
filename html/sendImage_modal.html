@@ -1,0 +1,120 @@
+<div class='content-wrapper' ng-controller="ChatCtrl" ng-init="initFunction()">
+    <div class="col-lg-12">
+        <h3>Attach Image:</h3>
+        <hr>
+        <div class="content-body">
+            <ul class="nav nav-tabs">
+                <li ng-class="{'active': seltab=='image'}"><a data-toggle="tab" href="javascript:" ng-click="showTab('image')">Send
+                        Image
+                    </a></li>
+                <li ng-class="{'active': seltab=='video'}"><a data-toggle="tab" href="javascript:" ng-click="showTab('video')">Send
+                        Video
+                    </a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane" ng-class="{'fade in active': seltab=='image'}" ng-if="seltab=='image'">
+                    <div class="row margin-top-10">
+                        <div class="col-md-12">
+                            <md-input-container style="width:100%;">
+                                <label>Text</label>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="textmessage" name="textmessage" ng-model="textmessage">{{textmessage}}</textarea>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div>
+
+                                    <input type="file" custom-on-change="handleFileSelect" name="file" id="fileInput" style="display: none;" accept="image/*"
+                                    />
+                                    <button id="uploadButton2" onclick="javascript: document.getElementById('fileInput').click()" class="btn btn-primary btn-bok btn-sm">Select
+                                        Image
+                                    </button>
+                                </div>
+                                <!-- <ui-cropper image="myImage" result-image="myCroppedImage"></ui-cropper> -->
+                                <div class="cropArea " style="width: 100%" ng-show="myImage!=''">
+                                    <img-crop image="myImage" result-image="myCroppedImage" area-type="rectangle"></img-crop>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- <label>Select Topic Image: </label> -->
+                                <img src="{{apiUrl}}{{details.image_url}}" style="width:50%;float: left;">
+                            </div>
+                            <div class="col-md-6">
+                                <div>Cropped Image:</div>
+                                <br><br>
+                                <div>
+                                    <img src="{{myCroppedImage}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-info saveBtn" ng-click="saveImageMessage(textmessage,myCroppedImage)">Save</button>
+                                <button type="button" ng-click="closeModal()" class="btn">Back</button>
+                            </div>
+                            <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu1" class="tab-pane" ng-class="{'fade in active': seltab=='video'}" ng-if="seltab=='video'">
+                    <div class="row margin-top-10">
+                        <div class="col-md-12">
+                            <md-input-container style="width:100%;">
+                                <label>Text</label>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="textmessage" name="textmessage2" ng-model="textmessage2">{{textmessage2}}</textarea>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Video</label>
+                            <div class="form-group">
+                                <input type="file" ngf-select ng-model="file" name="file" accept="video/*" ngf-max-size="20MB" id="uploadFiles" style="display: none;"
+                                />
+                                <button id="uploadButton1" onclick="javascript: document.getElementById('uploadFiles').click()" class="btn btn-primary btn-bok btn-sm">Upload
+                                    Video
+                                </button> {{file.name}} {{errorMsg1}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-info saveBtn" ng-click="saveVideoMessage(textmessage2,file)">Save</button>
+                                    <button type="button" ng-click="closeModal()" class="btn">Back</button>
+                                </div>
+                                <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                    ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                    <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                    <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width: 500px;
+        height: 350px;
+    }
+</style>

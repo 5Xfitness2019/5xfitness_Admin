@@ -1,0 +1,119 @@
+<div class='content-wrapper' ng-controller="InvoicesCtrl" ng-init="app.settings.pagetitle = 'Invoice Details';" >
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="col-sm-4" ng-click="pop()">Invoice Details :</h4>    
+                                    <div class="text-right col-sm-8" >
+                                        <button type="button" ng-click="sendInvoicePopup(request_id)" style="background:#bb1d2c !important" class="btn btn-primary ">Send</button>       
+                                        <button type="button" ng-click="cancel()" class="btn">Back</button>                                 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <br>
+                            <table class="table user-list table-striped table-hover">
+                                <thead>
+                                    <tr >
+                                        <th><span>#</span></th>
+                                        <th><span>Total Amount</span></th>
+                                        <th><span>Advance Amount</span></th>
+                                        <th><span>PDF File</span></th>                                        
+                                        <th><span>Doc File</span></th>                                        
+                                        <th><span>Excel FIle</span></th>                                        
+                                        <th ng-if="!invoicepaid"><span>First Invoice</span></th>                                        
+                                        <th><span>Status</span></th>
+                                        <th><span>Mark As Paid</span></th>
+                                                                                
+                                        <th><span>Actions</span></th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="invoices in invoice_list">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{invoices.amount}}</td>
+                                        <td>{{invoices.advance_amount}}</td>
+                                        <td><a href="{{baseUrl}}{{invoices.pdf_path}}" ng-if="invoices.pdf_path" target="_blank">View</a></td>
+                                        <td><a href="{{baseUrl}}{{invoices.doc_path}}" ng-if="invoices.doc_path" >View</a></td>
+                                        <td><a href="{{baseUrl}}{{invoices.excel_path}}" ng-if="invoices.excel_path" >View</a></td>
+                                        <td ng-if="!invoicepaid">
+                                            <!-- <input type="radio" name="firstinvoice" value="{{invoices.invoice_id}}" ng-model="firstinvoice" 
+                                            ng-click="makeFirst(invoices.invoice_id,invoices.request_id)" style="width:30px;"> -->
+                                            <input type="radio" id="radio{{$index+1}}" name="radio" name="firstinvoice" value="{{invoices.invoice_id}}" ng-model="firstinvoice" 
+                                            ng-click="makeFirst(invoices.invoice_id,invoices.request_id)" />
+                                            <label for="radio{{$index+1}}"><span></span></label>
+                                        </td>
+
+                                        <td><span ng-if="invoices.status == 'notpaid'">Not Paid</span>
+                                            <span ng-if="invoices.status == 'paid'">Paid</span>
+                                            <span ng-if="invoices.status == 'initialpaid'">Partially Paid</span>
+                                        </td>
+                                        <td>
+                                                <button type="button" ng-if="invoices.payment_by=='cash'" ng-click="markaspaid(invoices)"  style="background:#bb1d2c !important" class="btn btn-primary ">Confirm Payment</button>  
+                                            
+                                        </td>
+                                        <td >
+                                            <a href="javascript:void(0)" ng-click="deleteInvoice(invoices)" class="table-link danger" ng-if="invoices.status=='notpaid'">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="invoice_list.length==0">
+                                        <td colspan="9">No records found</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<style>
+
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    color: #9d9d9d;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:22px;
+    height:22px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color:#9d9d9d;
+}
+
+input[type="radio"]:checked + label span{
+     background-color:#bb1d2c;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+
+</style>

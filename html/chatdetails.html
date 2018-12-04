@@ -1,0 +1,278 @@
+<div class='content-wrapper' ng-controller="ChatCtrl" ng-init="app.settings.pagetitle = 'Chats'; getChatHistory();">
+    <div class="col-lg-12">
+        <hr>
+
+
+                <div class="row chat-window col-xs-8 col-md-8" id="chat_window_1" style="margin-left:10px;">
+                        <div class="col-xs-12 col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading top-bar">
+                                    <div class="col-md-8 col-xs-8">
+                                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - Miguel</h3>
+                                    </div>
+                                   
+                                </div>
+
+
+                                    <md-content scroll-to-bottom="chats" layout="column" style="background-color: #F5F5F5;height:600px;overflow-x:hidden;padding-top: 250px" >
+                                        <div ng-repeat="list in chats">
+                                            <span ng-if="user.member_id==list.member_id">
+                                                <div class="row msg_container base_sent">
+                                                    <div class="col-md-10 col-xs-10">
+                                                        <div class="messages msg_sent">
+                                                            <p>{{list.message}}</p>
+                                                            <p ng-if="list.type == 'image'">
+                                                                <img src="{{apiUrl}}{{list.media_url}}" style="width:20%;"  class="img-responsive">
+                                                            </p>
+                                                            <p  ng-if="list.type == 'video'">
+                                                                <video width="250" controls>
+                                                                    <source ng-src="{{getIframeSrc(list.media_url)}}" type="video/mp4">
+                                                                    Your browser does not support HTML5 video.
+                                                                </video>
+                                                            </p>
+                                                            
+                                                            <time datetime="2009-11-13T20:00">{{list.first_name}} {{list.last_name}} • {{list.timeInsec}}</time>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-xs-2 avatar" style="width: 66px;margin:0px 10px;" >
+                                                        <img style="border-radius: 34px;" src="{{apiUrl}}images/users/{{list.image}}" ng-if="list.image" class="img-responsive">
+                                                        <img style="border-radius: 34px;" src="{{apiUrl}}no-image.png" ng-if="!list.image" class="img-responsive">
+                                                    
+                                                    </div>
+                                                </div>
+                                            </span>
+                                            <span ng-if="user.member_id!=list.member_id">
+                                                <div class="row msg_container base_receive">
+                                                    <div class="col-md-2 col-xs-2 avatar"  style="width: 66px;margin:0px 10px">
+                                                            <img style="border-radius: 34px;" src="{{apiUrl}}images/users/{{list.image}}" ng-if="list.image" class="img-responsive">
+                                                            <img style="border-radius: 34px;" src="{{apiUrl}}no-image.png" ng-if="!list.image" class="img-responsive">
+                                                    </div>
+                                                    <div class="col-md-10 col-xs-10">
+                                                        <div class="messages msg_recieve">
+                                                            <p>{{list.message}}</p>
+                                                            <p ng-if="list.type == 'image'">
+                                                                <img src="{{apiUrl}}{{list.media_url}}" style="width:45%;"  class="img-responsive">
+                                                            </p>
+                                                            <p  ng-if="list.type == 'video'">
+                                                                <video width="250" controls>
+                                                                    <source ng-src="{{getIframeSrc(list.media_url)}}" type="video/mp4">
+                                                                    Your browser does not support HTML5 video.
+                                                                </video>
+                                                            </p>
+                                                            <time datetime="2009-11-13T20:00">{{list.first_name}} {{list.last_name}} • {{list.timeInsec}}</time>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </md-content>
+
+                     
+                              
+                                <div class="panel-footer">
+                                    <div class="input-group">
+                                        <div class="col-xs-12 col-md-12">
+                                            <span class="col-xs-9 col-md-9">
+                                                <input type="text" ng-model="message" class="form-control" placeholder="Write your message here..." />
+                                            </span>
+                                            <span class="col-xs-3 col-md-3">
+                                                <span class="fa-stack" ng-click="sendImage()">
+                                                    <i class="fa fa-paperclip"  style="font-size:21px;"></i>
+                                                </span>
+                                                <!-- <span class="fa-stack">
+                                                    <i class="fa fa-image" style="font-size:21px;"></i>
+                                                </span>
+                                                &nbsp;
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-video-camera" style="font-size:21px;"></i>
+                                                </span> -->
+                                                &nbsp;
+                                                <button class="btn btn-info"  style="color:#FFFFFF;background:#bb1d2c !important;" ng-click="sendMessage()">Send</button>
+                                            </span>
+                                             
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="input-group">
+                                        <input id="btn-input" type="text" ng-model="message" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                        <span class="fa-stack">
+                                            <i class="fa fa-square fa-stack-2x"></i>
+                                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-info sizeadBtn" id="btn-chat" style="color:#FFFFFF;" ng-click="sendMessage()">Send</button>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+       
+
+
+    </div>
+</div>
+<style>
+    .chat-box {
+    padding: 8px;
+    border-radius: 8px;
+}
+.message-box {
+    border-top: 1px solid #E0E0E0;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: white;
+}
+
+.message {
+    overflow: scroll;
+    margin: 4px;
+    border: 1px solid #E0E0E0;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    height: 110px;
+}
+
+.md-select-value{
+    padding: 8px;
+}
+
+
+.col-md-2, .col-md-10{
+    padding:0;
+}
+.panel{
+    margin-bottom: 0px;
+}
+.chat-window{
+    bottom:0;
+    position:fixed;
+    float:right;
+    margin-left:10px;
+}
+.chat-window > div > .panel{
+    border-radius: 5px 5px 0 0;
+}
+.icon_minim{
+    padding:2px 10px;
+}
+.msg_container_base{
+  background: #e5e5e5;
+  margin: 0;
+  padding: 0 10px 10px;
+  max-height:550px;
+  overflow-x:hidden;
+}
+.top-bar {
+  background: #666;
+  color: white;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.msg_receive{
+    padding-left:0;
+    margin-left:0;
+}
+.msg_sent{
+    padding-bottom:23px !important;
+    margin-right:0;
+}
+.messages {
+  background: white;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  max-width:100%;
+}
+.messages > p {
+    font-size: 13px;
+    margin: 0 0 0.2rem 0;
+  }
+.messages > time {
+    font-size: 11px;
+    color: #ccc;
+}
+.msg_container {
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+}
+img {
+    display: block;
+    width: 100%;
+}
+.avatar {
+    position: relative;
+}
+.base_receive > .avatar:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid #FFF;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.base_sent {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.base_sent > .avatar:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid white;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-shadow: 1px 1px 2px rgba(black, 0.2); 
+}
+
+.msg_sent > time{
+    float: right;
+}
+
+
+
+.msg_container_base::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.msg_container_base::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.msg_container_base::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.btn-group.dropup{
+    position:fixed;
+    left:0px;
+    bottom:0;
+}
+.panel-footer{
+    background-color: #FFFFFF;
+}
+</style>

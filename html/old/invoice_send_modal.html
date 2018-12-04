@@ -1,0 +1,82 @@
+<div class='content-wrapper'>
+    <div class="col-lg-12">
+        <h3>Send Invoice:</h3>
+        <hr>
+        <div class="content-body">
+            <div class="row margin-top-10">
+
+                <div class="col-md-12">
+                    <md-input-container style="width:100%;">
+                        <label>Total Amount</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="amount" name="amount" ng-model="amount" 
+                            value="{{amount}}" ng-keypress="filterValue($event)"
+                            autocomplete="off"/>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="col-md-12">
+                    <md-input-container style="width:100%;">
+                        <label>Advance Amount</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="advance_amount" name="advance_amount" ng-model="advance_amount" 
+                            value="{{advance_amount}}" ng-keypress="filterValue($event)"
+                            autocomplete="off"/>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="uploadFilesPDF" onchange="angular.element(this).scope().uploadPDFReports(this)"  style="display: none;"/>
+                        <button id="uploadButton1" onclick="javascript: document.getElementById('uploadFilesPDF').click()" class="btn btn-primary btn-bok btn-sm" >Upload PDF File</button>
+                        {{errorMsg1}}
+                    </div>
+                    <div class="col-md-2"><a href="{{baseUrl}}{{pdfPath}}" target="_blank" ng-if="pdfPath">View</a></div>
+                    
+                </div>
+                
+                <div class="col-md-12"></br></div>
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="uploadFilesDOC" onchange="angular.element(this).scope().uploadDocReports(this)"  style="display: none;"/>
+                        <button id="uploadButton2" onclick="javascript: document.getElementById('uploadFilesDOC').click()" class="btn btn-primary btn-bok btn-sm" >Upload Documents</button>
+                        {{errorMsg2}}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{baseUrl}}{{docPath}}" ng-if="docPath">View</a>
+                    </div>
+                </div>
+                <div class="col-md-12"></br></div>
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="uploadFilesExcel" onchange="angular.element(this).scope().uploadExcelReports(this)"  style="display: none;"/>
+                        <button id="uploadButton3" onclick="javascript: document.getElementById('uploadFilesExcel').click()" class="btn btn-primary btn-bok btn-sm" >Upload Excel File</button>
+                        {{errorMsg3}}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{baseUrl}}{{excelPath}}" ng-if="excelPath">View</a>
+                    </div>
+
+                </div>
+                
+                
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-info saveBtn" ng-click="saveInvoice(amount,advance_amount)" >Save</button>
+                        <button type="button" ng-click="closeModal()" class="btn">Back</button>
+                    </div>
+                    <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" 
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper" ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                        <p class="" ng-show="validationError1">{{validationError1}}</p>
+                        <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

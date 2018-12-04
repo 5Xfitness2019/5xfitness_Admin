@@ -1,0 +1,144 @@
+
+<div class='content-wrapper' ng-controller="DoctorsCtrl" 
+ng-init="app.settings.pagetitle = currentRouteName=='app.tenantList'?'Tenant Management': 
+currentRouteName=='app.staffList'?'Staff Management':'Owner Management'; getuserList();">
+
+    <div class="col-lg-12"> 
+        <section class="box ">
+            <header class="panel_header">
+                    <h2 class="title pull-left" ng-if="currentRouteName=='app.tenantList'">All Tenents </h2>
+                    <h2 class="title pull-left" ng-if="currentRouteName=='app.staffList'">All Staffs </h2>
+                    <h2 class="title pull-left" ng-if="currentRouteName=='app.ownerList'">All Owners </h2>
+                </header>
+            <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-8 col-md-8 col-sm-9 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+
+            </div>
+            <div class="content-body padding-bottom-0">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                         <div class="col-lg-4 col-md-2" >
+                                <md-input-container style="width:100%">
+                                <label>Search</label>
+                                <input ng-model="searchByKeyWord" my-enter="searchByKeyword()">
+                                </md-input-container>   
+                        </div>
+                        <div class="col-lg-2 col-md-2" style="padding-top:12px;padding-left:0px;">
+                              <button class="btn btn-info sizeadBtn" ng-click="searchByKeyword()">SEARCH</button>
+                        </div>
+                         <div class="col-lg-2 col-md-2 pull-right" style="padding-top:12px;padding-left:0px;">
+                              <button class="btn btn-info sizeadBtn" ng-click="addNewUser()">ADD</button>
+                         </div>
+                    </div>
+                </div>
+
+              
+                <p ng-show="successMsg1">{{successMsg1}}</p>
+
+
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <table class="table user-list table-striped table-hover">
+                            <thead>
+                                <tr>
+                                <th><span>Full Name</span></th>
+                            
+                                <th><span>Email</span></th>
+                                <th><span>Address</span></th>
+                                <th><span>State</span></th>
+                                <th><span>Zipcode</span></th>
+                                <th ng-if="currentRouteName=='app.tenantList'"><span>Created</span></th>
+                                <th ng-if="currentRouteName=='app.staffList'"><span>Field of Expertise</span></th>
+                                <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in users_list">
+                                    <td style="text-transform: capitalize;">
+                                       
+                                    {{user.first_name}} {{user.last_name}}
+                                     
+                                    </td>
+                                    
+                                   
+                                    <td>
+                                  {{user.email}}
+                                    </td>
+                                     <td>
+                                      {{user.address}}
+                                    </td>
+                                    <td>
+                                      {{user.state}}
+                                    </td>
+                                    <td>
+                                      {{user.zipcode}}
+                                    </td>
+                                    <td ng-if="currentRouteName=='app.tenantList'">{{user.created_date| date }}</td>
+                                    <td ng-if="currentRouteName=='app.staffList'">{{user.expertise_in}}</td>
+                                    
+                                    <td style="width: 20%;">
+                                         
+                                        <a href="#/app/user_Details/{{user.member_id}}" class="table-link">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="javascript:void(0)" ng-click="deleteCurUser($event,$index,user.member_id)" class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+
+                                        <a href="#/app/userproperties/{{user.member_id}}" class="table-link"  ng-if="currentRouteName=='app.tenantList'">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+
+                        <p ng-show="validationError1 && !successMsg1" >{{validationError1}}</p>
+                        <p ng-show="!validationError1 && successMsg1" >{{successMsg1}}</p>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center padding-top-30 padding-bottom-30">
+                                <!-- <uib-pagination total-items="totDoctors" ng-model="curPage"></uib-pagination> -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<style>
+
+ .table thead tr th {
+    text-transform: uppercase;
+    font-size: 0.875em;
+    text-align: left !important;
+    background-color: #9d9d9d;
+    color: #fff;
+}
+.table thead tr th {
+    border-bottom: 2px solid #e7ebee;
+}
+.table tbody tr td:first-child {
+    font-size: 1.125em;
+ 
+}
+.table tbody tr td {
+    
+    vertical-align: middle;
+ 
+   
+}
+</style>

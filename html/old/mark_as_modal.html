@@ -1,0 +1,45 @@
+<div class='content-wrapper'  ng-init="getPaymentDetail();">
+    <div class="col-lg-12">
+        <h3>Payment Details {{invoiceDetail}}</h3>
+       
+        <div class="content-body">
+            <div class="row margin-top-10">
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <table class="table user-list table-striped table-hover">
+                            <tbody>
+                                <tr ng-repeat="lists in payList">
+                                    <td style="text-transform: capitalize;">{{lists.payment_type}} </td>
+                                    <td style="text-transform: capitalize;">{{lists.cost}}</td>
+                                    <td style="text-transform: capitalize;">
+                                        <span ng-if="lists.payment_type == 'cash'  && lists.mark_as_paid != 'Y' ">
+                                            <button type="button" class="btn btn-info saveBtn" ng-click="saveMarkPaid(lists);" >Mark As Paid</button>
+                                        </span>
+                                    </td> 
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12"></br></div>
+                
+                
+                
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                    <div class="pull-right">
+                        
+                        <button type="button" ng-click="closeModal()" class="btn">Close</button>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- START TOPBAR -->
+<div class='logo-area'>
+    <img src="img/logo_wide.png" style="height:45px;margin:10px;">
+</div>
+<div class='quick-area'>
+    <div class='pull-left slantit'>
+        <ul class="info-menu left-links list-inline list-unstyled">
+            <li class="sidebar-toggle-wrap">
+                <a href data-toggle="sidebar" class="sidebar_toggle" ng-click="app.settings.menuFolded = !app.settings.menuFolded; menuChatToggle('menu',app.settings.menuFolded) ">
+                    <i class="material-icons">menu</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="pull-left pagetitle">
+        <span class='line'></span>
+        <h1>{{app.settings.pagetitle}}</h1>
+        <div></div>
+    </div>
+    <div class="pull-right" ng-controller="globalCtrl">
+        <ul class="info-menu left-links list-inline list-unstyled">
+            <li class="sidebar-toggle-wrap">
+                <a ng-click="logout()" style="color: #ECAD45;font-size: 20px;cursor: pointer;text-decoration: none;">
+        <i class="material-icons">lock</i>
+        <span class="title">Logout</span>    
+        </a>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+
+</div>

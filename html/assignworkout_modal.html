@@ -1,0 +1,188 @@
+<div class='content-wrapper' ng-init="workoutmodel()">
+    <div class="col-lg-12">
+        <h3>Assign Work out:</h3>
+        <hr>
+        <div class="content-body">
+            <div class="row margin-top-10">
+                <div class="col-md-12">
+                    <label style="font-weight:100;">Category</label>
+                    <div class="form-group">
+
+
+                        <select style="width: 100%;" id="category_id" ng-change="getSubCategory(category_id)" name="category_id" ng-model="category_id"
+                            class="" ng-options="prop.category_id  as prop.category_name for prop in categories">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label style="font-weight:100;">Sub Category</label>
+                    <div class="form-group">
+
+
+                        <select style="width: 100%;" id="subcategory_id" ng-change="getWorkoutsFilter(category_id,subcategory_id)" name="subcategory_id" ng-model="subcategory_id"
+                            class="" ng-options="prop.sub_category_id  as prop.sub_category_name for prop in subcategories">
+                        </select>
+
+
+
+                        <!-- <select class="" ng-model="subcategory_id" style="width:100%;" ng-change="getWorkoutsFilter(category_id,subcategory_id)">
+                            <option value="">Select Sub Category</option>
+                            <option ng-repeat="prop in subcategories" value="{{prop.sub_category_id}}">{{prop.sub_category_name}}</option>
+                        </select> -->
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <md-input-container style="margin:27px 0;width:100%;">
+                        <label>Workout</label>
+                        <md-select ng-model="assignedworkout" ng-change="changeRepeat(assignedworkout)">
+                            <md-option ng-repeat="workout in workouts" ng-value="workout">
+                                <img src="{{apiUrl}}{{workout.image_url}}" style="height:30px; padding:0px 10px 0px 6px ;" />                                {{workout.workout_name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div class="col-md-12">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Reps(In No's)</label>
+                        <div class="form-group">
+                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min=0 class="form-control" id="repeat_times" name="repeat_times" ng-model="repeat_times" value="{{repeat_times}}"
+                                autocomplete="off" />
+                        </div>
+                    </md-input-container>
+                </div>
+
+
+                <div class="col-md-6">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Rest(In minutes)</label>
+                        <div class="form-group">
+                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min=0 class="form-control" id="rest" name="rest" ng-model="rest" value="{{rest}}" autocomplete="off"
+                            />
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="col-md-6">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Rest(In Sec)</label>
+                        <div class="form-group">
+                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true"  type="number" min=0 class="form-control" id="rest_sec" name="rest_sec" ng-model="rest_sec" value="{{rest_sec}}" autocomplete="off"
+                            />
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="col-md-6">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Sets(In No's)</label>
+                        <div class="form-group">
+                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true"  type="number" min=0 class="form-control" id="duration" name="duration" ng-model="duration" value="{{duration}}" autocomplete="off"
+                            />
+                        </div>
+                    </md-input-container>
+                </div>
+                <div class="col-md-6">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Weight(In lbs)</label>
+                        <div class="form-group">
+                            <input onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number" min=0 class="form-control" id="weight" name="weight" ng-model="weight" value="{{weight}}" autocomplete="off"
+                            />
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="col-md-12">
+                    <md-input-container style="width:100%;margin-top:25px;">
+                        <label>Details</label>
+                        <div class="form-group">
+                            <input type="text" ng-model="workout_details" />
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div class="col-md-12">
+
+                    <label>Set Alarm</label>
+                    <div class="form-group">
+                        <div class="col-md-4"><input type="radio" ng-model="work_period" value="weekly"> <div style="    width: 86%;
+                            float: right;
+                            padding-top: 6px;">Daily</div>
+                        </div>
+                        <div class="col-md-4"> <input type="radio" ng-model="work_period" value="onetime"> <div style="    width: 86%;
+                            float: right;
+                            padding-top: 6px;">One Time</div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-6" ng-show="work_period == 'onetime' ">
+
+                    <div flex-gt-xs>
+
+                        <md-datepicker style="margin-top: 10px;" md-min-date="minDate" ng-model="onetime_date" md-placeholder="Enter date"></md-datepicker>
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-md-6" ng-show="work_period == 'onetime'  || work_period == 'weekly' ">
+
+                    <input style="margin-top: 10px;" mdc-datetime-picker="" date="false" time="true" type="text" id="time" short-time="true"
+                        placeholder="Time" format="hh:mm a" ng-model="work_times" class=" md-input">
+
+                </div>
+
+                <div class="col-md-6" ng-show="work_period == 'weekly' ">
+
+                    <md-input-container style="    padding: 0px; margin: 0px 0;">
+
+                        <md-select placeholder="Select Days" ng-model="chosen_week" multiple>
+                            <md-optgroup label="Select Days">
+                                <md-option ng-value="'sun'">S</md-option>
+                                <md-option ng-value="'mon'">M</md-option>
+                                <md-option ng-value="'tue'">T</md-option>
+                                <md-option ng-value="'wed'">W</md-option>
+                                <md-option ng-value="'thu'">T</md-option>
+                                <md-option ng-value="'fri'">F</md-option>
+                                <md-option ng-value="'sat'">S</md-option>
+
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 " style="margin-top: 13px;">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-info saveBtn" ng-click="saveWorkoutAssign(workout_details,repeat_times,assignedworkout.workout_id,category_id,subcategory_id , work_period , onetime_date ,chosen_week ,work_times ,duration,rest, weight,rest_sec)">Save</button>
+                    <button type="button" ng-click="closeModal()" class="btn">Back</button>
+                </div>
+                <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                    ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                    <p class="" ng-show="validationError1">{{validationError1}}</p>
+                    <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    .md-select-value {
+        padding: 8px;
+    }
+</style>

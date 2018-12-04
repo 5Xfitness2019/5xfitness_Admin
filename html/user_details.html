@@ -1,0 +1,767 @@
+<div class='content-wrapper' ng-controller="UsersCtrl" ng-init="app.settings.pagetitle = 'User Details';getUserdetails();">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                            <div class="uprofile-content padding-top-30">
+                       
+                                <ul class="nav nav-tabs">
+                                    <li ng-class="{'active': menuval=='menu1'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="gotoTab('menu1');">Basic Profile Info</a>
+                                    </li>
+                                    <li ng-class="{'active': menuval=='menu2'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="getHealthInfo('menu2',details);">Health Info</a>
+                                    </li>
+                                    <li ng-class="{'active': menuval=='menu3'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="getHealthInfo('menu3',details);">Pain Info</a>
+                                    </li>
+                                    <li ng-class="{'active': menuval=='menu4'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="getAssignedWorkouts('menu4',details);">Assigned Workouts</a>
+                                    </li>
+                                    <li ng-class="{'active': menuval=='menu5'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="getDailyLogWorkouts('menu5',details);">Daily Log Of Workout</a>
+                                    </li>
+                                    <li ng-class="{'active': menuval=='menu6'}">
+                                        <a data-toggle="tab" href="javascript:" ng-click="getPainChartRecords('menu6',details,'','');">Pain Chart Showing Improvement</a>
+                                    </li>
+                                </ul>
+                                
+                                  <div class="tab-content">
+                                    <div id="menu1" class="tab-pane fade"  ng-class="{'in active': menuval=='menu1'}">
+                                      <h3>Basic Profile Info</h3>
+                                      <p>
+
+                                            <div class="panel panel-default">
+                                                     <div class="panel-body">
+                                                         
+                                                      <div class="box box-info">
+                                                          
+                                                            <div class="box-body">
+                                                                <div class="col-sm-4">
+                                                                <div  align="center">
+                                                                    <img src="{{apiUrl}}images/users/{{details.image}}" ng-if="details.image" class="img-circle img-responsive" style="height:150px;">
+                                                                    <img src="{{apiUrl}}no-image.png" ng-if="!details.image" class="img-circle img-responsive" style="height:150px;">
+
+                                                                    <!-- <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" style="height:150px;"> 
+                                                                    -->
+                                                            
+                                                                
+                                                                </div>
+                                                        
+                                                                <br>
+                                                      
+                                                                <!-- /input-group -->
+                                                              </div>
+                                                              <div class="col-sm-6">
+                                                              <h4 style="color:#00b1b1;text-transform: capitalize;" >{{details.first_name}} {{details.last_name}} </h4></span>
+                                                                <span><p>{{details.email}}</p></span>            
+                                                              </div>
+                                                              <div class="clearfix"></div>
+                                                
+                                                              <table class="table user-list table-striped table-hover">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">First Name:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.first_name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Last Name:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.last_name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Email:</td>
+                                                                        <td style="">{{details.email}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Date Of Birth:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.dob}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Gender:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.gender}}</td>
+                                                                    </tr>
+                                                                    <!-- <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Zipcode:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.postcode}}</td>
+                                                                    </tr> -->
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Phone No:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.mobile}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Marital Status:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.marital_status}}</td>
+                                                                    </tr>
+                                                                    <!-- <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Address:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.address}}</td>
+                                                                    </tr> -->
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">Occupation:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.occupation}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-transform: capitalize;width:30%;">About:</td>
+                                                                        <td style="text-transform: capitalize;">{{details.about}}</td>
+                                                                    </tr>
+                                                                        
+                                                                                                        
+                                                                
+                                                                </tbody>
+                                                            </table>     
+                                                            
+                                                 
+
+                                                            </div>
+                                                  
+                                                          </div>
+                                                         
+                                                              
+                                                      </div> 
+                                                      </div>
+
+
+
+
+                                            <!-- <div class="row margin-top-10">
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>First Name</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" disabled required id="first_name" name="first_name" ng-model="details.first_name" value="{{details.first_name}}"
+                                                            />
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>Last Name</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" disabled required id="last_name" name="last_name" ng-model="details.last_name" value="{{details.last_name}}"
+                                                            />
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="row margin-top-10">
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>Email</label>
+                                                        <div class="form-group">
+                                                            <input type="email" style="color:#736e6e;" disabled class="form-control" disabled id="email" name="email" ng-model="details.email" value="{{details.email}}"
+                                                            />
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>Gender</label>
+                                                        <md-select ng-model="details.gender">
+                                                            <md-option ng-repeat="state in genderAr" ng-value="state" >
+                                                            {{state}}
+                                                            </md-option>
+                                                        </md-select>
+                                                    </md-input-container>
+                                            
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="row margin-top-10">
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>Zipcode</label>
+                                                        <div class="form-group">
+                                                            <input type="number" disabled class="form-control" id="postcode" name="postcode" ng-model="details.postcode" value="{{details.postcode}}"
+                                                            />
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <md-input-container style="margin:27px 0;width:100%;">
+                                                        <label>Phone No</label>
+                                                        <div class="form-group">
+                                                            <input type="text" disabled class="form-control" required id="mobile" name="mobile" ng-model="details.mobile" value="{{details.mobile}}"
+                                                            />
+                                                        </div>
+                                                    </md-input-container>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="row margin-top-10">
+                                                   
+                                                    
+                                                    <div class="col-md-6">
+                                                        <md-input-container style="margin:27px 0;width:100%;">
+                                                            <label>Marital Status</label>
+                                                            <md-select ng-model="details.marital_status">
+                                                                <md-option ng-repeat="state in maritalAr" ng-value="state" >
+                                                                {{state}}
+                                                                </md-option>
+                                                            </md-select>
+                                                        </md-input-container>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <md-input-container style="margin:27px 0;width:100%;">
+                                                            <label>Date Of Birth</label>
+                                                            
+                                                            <md-datepicker style="width:100%;" disabled required ng-model="details.dob" md-placeholder="Enter date"></md-datepicker>
+                                                        
+                                                        </md-input-container>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="row margin-top-10">
+                                                    <div class="col-md-6">
+                                                        <md-input-container style="margin:27px 0;width:100%;">
+                                                            <label>Address</label>
+                                                            <div class="form-group">
+                                                                <textarea name="bio" disabled ng-model="details.address" md-maxlength="500">{{details.address}}</textarea>
+                                                                
+                                                            </div>
+                                                        </md-input-container>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <md-input-container style="margin:27px 0;width:100%;">
+                                                            <label>About</label>
+                                                            <textarea name="bio" disabled ng-model="details.about" md-maxlength="500">{{details.about}}</textarea>
+                                                        </md-input-container>
+                                                    </div>
+                                                    
+                                                    
+                                                </div> -->
+                                                <!-- <div class="row margin-top-10">
+                                                    <div class="col-md-6">
+                                                        <md-input-container style="margin:27px 0;width:100%;">
+                                                            <label>Occupation</label>
+                                                            <div class="form-group">
+                                                                <input type="text" disabled class="form-control" id="occupation" name="occupation" ng-model="details.occupation" value="{{details.occupation}}"
+                                                                />
+                                                            </div>
+                                                        </md-input-container>
+                                                    </div>
+                                                </div> -->
+
+                                            <!-- <div class="row">
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                                                        
+                                                        <div class="pull-right">
+                                                            <button type="button" class="btn btn-info saveBtn" ng-click="saveUser()">Save</button>
+                                                            <button type="button" ng-click="goback('app.users')" class="btn">Back</button>
+                                                        </div>
+                                                        <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                                            ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                                            <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                                            <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                                                        </div>
+                    
+                    
+                                                    </div>
+                                                </div> -->
+                                      </p>
+                                    </div>
+                                    <div id="menu2" class="tab-pane fade" ng-class="{'in active': menuval=='menu2'}">
+                                      <h3>Health Info</h3>
+                                      <p>
+                                        <ul class="nav nav-tabs">
+                                            <li ng-class="{'active': healthmenuval=='healthmenu1'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabHealth('healthmenu1');">Chief Complaint</a>
+                                            </li>
+                                            <li ng-class="{'active': healthmenuval=='healthmenu2'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabHealth('healthmenu2');">Excercise History</a>
+                                            </li>
+        
+                                            <li ng-class="{'active': healthmenuval=='healthmenu3'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabHealth('healthmenu3');">Medical History</a>
+                                            </li>
+                                            <li ng-class="{'active': healthmenuval=='healthmenu4'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabHealth('healthmenu4');">Excercise Risk Factors</a>
+                                            </li>
+                                            <li ng-class="{'active': healthmenuval=='healthmenu5'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabHealth('healthmenu5');">Cardiac Risk Factors</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="healthmenu1" class="tab-pane fade"  ng-class="{'in active': healthmenuval=='healthmenu1'}">
+                                                <h3>Problem</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>#</span></th>
+                                                                <th><span>Answer</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;width:30%;">Major Complaint</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.major_complaint}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;width:30%;">Date Of Onset</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.date_of_onset}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;width:30%;">Previous Treatment</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.prev_treatment}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;width:30%;">Other Complaints</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.other_complaints}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </p>
+                                            </div>
+                                            <div id="healthmenu2" class="tab-pane fade"  ng-class="{'in active': healthmenuval=='healthmenu2'}">
+                                                <h3>Excercise History</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>#</span></th>
+                                                                <th><span>Answer</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Do you sit a large part of the day during work?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.is_large_part_work == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.is_large_part_work == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you have curent activity patterns?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.is_activity_pattern == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.is_activity_pattern == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If yes, what type of activity?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.activity_type}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Minutes per session</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.minutes_per_session}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Session per week?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.session_per_week}}</td>
+                                                            </tr>
+                                                            <!-- <tr>
+                                                                <td>Intensity?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.intensity == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.intensity == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Other</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.other_step_2}}</td>
+                                                            </tr> -->
+                                                            <tr>
+                                                                <td>How many years have you excercised regularly if any?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.year_of_exercise}}</td>
+                                                            </tr>
+                                                            <!-- <tr>
+                                                                <td>The regular excercise's can be...</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.is_regular_exercise == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.is_regular_exercise == 'N'">No</span>
+                                                                </td>
+                                                            </tr> -->
+                                                            <tr>
+                                                                <td>Has your activity level changes over the past 5 years?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.is_activity_level_change_last_5_year == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.is_activity_level_change_last_5_year == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If currently exercising do you experience pain during exercise?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                    <span ng-if="healthinfo.is_pain_during_exercise == 'Y'">Yes</span>
+                                                                    <span ng-if="healthinfo.is_pain_during_exercise == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If yes, does it stop you from excercising?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">
+                                                                        <span ng-if="healthinfo.is_stop_excercising == 'Y'">Yes</span>
+                                                                        <span ng-if="healthinfo.is_stop_excercising == 'N'">No</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </p>
+                                            </div>
+
+                                            <div id="healthmenu3" class="tab-pane fade"  ng-class="{'in active': healthmenuval=='healthmenu3'}">
+                                                <h3>Medical History</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>#</span></th>
+                                                                <th><span>Answer</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Have you ever had any of the following disease?</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.diseases}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If other please specify</td>
+                                                                <td style="text-transform: capitalize;width:30%;">{{healthinfo.other_diseases}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table user-list table-striped table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan=2><span>If you could improve anything about your health, what would be your goals?</span></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Goal 1</td>
+                                                                    <td style="text-transform: capitalize;width:30%;">{{healthinfo.goal_1}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Goal 2</td>
+                                                                    <td style="text-transform: capitalize;width:30%;">{{healthinfo.goal_2}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Goal 3</td>
+                                                                    <td style="text-transform: capitalize;width:30%;">{{healthinfo.goal_3}}</td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+
+                                                </p>
+                                            </div>
+                                            <div id="healthmenu4" class="tab-pane fade"  ng-class="{'in active': healthmenuval=='healthmenu4'}">
+                                                <h3>Excercise Risk Factors</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>#</span></th>
+                                                                <th><span>Answer</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Do you have pain in your chest during strenuous activity or exercise?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.pains}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Have you, at any time in the last 12 months, had shortness of breath that came on during the day when you were not doing anything strenuous?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.shortness_of_breath}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you feel faint or have spells of severe dizziness, particularly with excerise?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.dizziness}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Have you, had an attack of shortness of breath that came on after you stopped excercising, at anytime in the last months?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.attack_of_shortness}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Have you at anytime in the last 12 months been woken at night by an attack of shortness of breath?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.woken_at_night}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you experience swelling or accumulation of fluid in the ankles?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.swelling_accumulation}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you get feeling that your heart is beating faster, racing or skipping beats either at rest or during excercise?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.heart_beating_faster}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you regularly get pains in your calves and lower legs during exercise, which are not due to soreness or stiffness?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.pains_in_calves}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you experience fatigue when you are not doing anything strenuous, or when you are not doing anything at all?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.fatigue}}</td>
+                                                            </tr>
+                                                                                                                                                                       
+                                                        </tbody>
+                                                    </table>
+                                                </p>
+                                            </div>
+
+                                            <div id="healthmenu5" class="tab-pane fade"  ng-class="{'in active': healthmenuval=='healthmenu5'}">
+                                                <h3>Cardiac Risk Factors</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><span>#</span></th>
+                                                                <th><span>Answer</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Do you smoke cigarettes daily?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.smoke_cigarettes}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If no, have you quit smoking in the last 2 years?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.quit_smoking}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If yes, how many cigarettes do you smoke each day on average?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.how_may_cigarettes}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Do you have a close relative(i.e Father, mother, brother or sister) who has had a stroke, heart attack or other cardiovascular disease?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.close_relative}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>If yes, what relation was this person (e.g. father, sister)</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.relation}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Has your doctor ever told you that you have high blood pressre?</td>
+                                                                <td style="text-transform: capitalize;">{{healthinfo.blood_pressure}}</td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+
+
+                                      </p>
+                                    </div>
+                                    <div id="menu3" class="tab-pane fade" ng-class="{'in active': menuval=='menu3'}">
+                                      <h3>Pain Info</h3>
+                                      <p>
+                                        <ul class="nav nav-tabs">
+                                            <li ng-class="{'active': painmenuval=='painmenu1'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabPain('painmenu1');">Pain Points Front</a>
+                                            </li>
+                                            <li ng-class="{'active': painmenuval=='painmenu2'}">
+                                                <a data-toggle="tab" href="javascript:" ng-click="gotoTabPain('painmenu2');">Pain Points Back</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="painmenu1" class="tab-pane fade"  ng-class="{'in active': painmenuval=='painmenu1'}">
+                                                <h3>Pain Points Front</h3>
+                                                <p>
+                                                    <table class="table user-list table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan=2><span>#</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-transform: capitalize;width:30%;"><img src="img/human.png" style="height: 355px;"></td>
+                                                                <td style="text-transform: capitalize;">
+                                                                    <span ng-repeat="front_5x in healthinfo.pain_points_front_5x">
+                                                                            <button class="btn_select btn_selected" style="border-radius: 50%;height: 36px;border: 2px solid #ECB04D;width: 36px;background-color: #ECB04D;cursor: default;">{{front_5x}}</button>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </p>
+                                            </div>
+                                            <div id="painmenu2" class="tab-pane fade"  ng-class="{'in active': painmenuval=='painmenu2'}">
+                                                    <h3>Pain Points Back</h3>
+                                                    <p>
+                                                        <table class="table user-list table-striped table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan=2><span>#</span></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="text-transform: capitalize;width:30%;"><img src="img/human-back.png" style="height: 355px;"></td>
+                                                                    <td style="text-transform: capitalize;">
+                                                                        <span ng-repeat="back_5x in healthinfo.pain_points_back_5x">
+                                                                                <button class="btn_select btn_selected" style="border-radius: 50%;height: 36px;border: 2px solid #ECB04D;width: 36px;background-color: #ECB04D;cursor: default;">{{back_5x}}</button>
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </p>
+                                                </div>
+                                        </div>
+                                      </p>
+                                    </div>
+                                    <div id="menu4" class="tab-pane fade" ng-class="{'in active': menuval=='menu4'}">
+                                      <h3>Assigned Workouts</h3>
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-lg-2 pull-right">
+                                                <a class="btn btn-info sizeadBtn"  href="javascript:" class="table-link" ng-click="assignModal()">
+                                                    ASSIGN
+                                                </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                      <p>
+                                        <table class="table user-list table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                        <th><span>#</span></th>
+                                                        <th><span>Workout Name</span></th>
+                                                        <th><span>Image</span></th>
+                                                        <th><span>Action</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="assigns in assignedWorks">
+                                                        
+                                                        <td>{{$index+1}}</td>
+                                                        <td style="text-transform: capitalize;width:30%;">{{assigns.workout_name}}</td>
+                                                        <td style="text-transform: capitalize;"><img src="{{apiUrl}}{{assigns.image_url}}" style="height: 100px;" ></td>
+                                                        <td style="text-transform: capitalize;">
+                                                            <a href="javascript:void(0)" ng-click="deleteAssigns(assigns)" class="table-link danger">
+                                                                <span class="fa-stack">
+                                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                            </a>
+
+                                                            <a ng-click="assignModal(assigns)"class="table-link">
+                                                                <span class="fa-stack">
+                                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                                </span>
+                                                            </a>
+
+
+
+
+
+
+                                                        </td>
+                                                </tr>
+                                                <tr ng-if="assignedWorks.length==0">
+                                                    <td colspan="4">No records found</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                      </p>
+                                    </div>
+                                    <div id="menu5" class="tab-pane fade" ng-class="{'in active': menuval=='menu5'}">
+                                        <h3>Daily Log Of Workout</h3>
+                                        <p>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 padding-left-0 padding-right-0">
+                                                <md-input-container style="margin:27px 0;width:100%;">
+                                                    <label>Select Date</label>
+                                                    <md-datepicker style="width:100%;" ng-model="logdate" md-placeholder="Enter date" md-open-on-focus ng-change="getDailyW(details,logdate)"></md-datepicker>
+                                                </md-input-container>
+                                            </div>
+                                        </p>
+                                            
+                                        <p>
+                                            <table class="table user-list table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                            <th><span>#</span></th>
+                                                            <th><span>Workout Name</span></th>
+                                                            <th><span>Image</span></th>
+                                                            <th><span>Count</span></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="assigns in dailyLogWorkout">
+                                                            
+                                                            <td>{{$index+1}}</td>
+                                                            <td style="text-transform: capitalize;width:30%;">{{assigns.workout_name}}</td>
+                                                            <td style="text-transform: capitalize;"><img src="{{apiUrl}}{{assigns.image_url}}" style="height: 100px;" ></td>
+                                                            <td style="text-transform: capitalize;">
+                                                                    {{assigns.count}}
+                                                            </td>
+                                                    </tr>
+                                                    <tr ng-if="assignedWorks.length==0">
+                                                        <td colspan="4">No records found</td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </p>
+                                    </div>
+                                    <div id="menu6" class="tab-pane fade" ng-class="{'in active': menuval=='menu6'}">
+                                        <h3>Pain Chart Showing Improvement</h3>
+                                        <p>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 padding-left-0 padding-right-0">
+                                                <md-input-container style="margin:27px 0;width:100%;">
+                                                    <label>From Date</label>
+                                                    <md-datepicker style="width:100%;" ng-model="fromdate" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                                </md-input-container>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-4 padding-left-0 padding-right-0">
+                                                <md-input-container style="margin:27px 0;width:100%;">
+                                                    <label>To Date</label>
+                                                    <md-datepicker style="width:100%;" ng-model="todate" md-placeholder="Enter date" md-open-on-focus></md-datepicker>
+                                                </md-input-container>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 padding-left-0 padding-right-0">
+                                                <button type="button" class="btn btn-info saveBtn" ng-click="getPainChartRecords('menu6',details,fromdate,todate)">Apply</button>
+                                            </div>
+                                            
+                                        </p>
+                                        
+                                        <p>
+
+
+                                            <div class="content-body padding-top-45 ">
+                                                <div class="row">
+                                                    <div class="col-md-8 col-sm-8 col-xs-8 padding-left-0 padding-right-0">
+                                                        <div class="r1_maingraph db_box" ng-init="chartjs={show:'line'}">
+                                                            <span class='pull-right switch'>
+                                                              <i class=" {{chartjs.show == 'line' ? 'icon-default': 'icon-secondary'}} fa fa-line-chart icon-sm" ng-click="chartjs.show = 'line'"></i>&nbsp; &nbsp;
+                                                              <i class=" {{chartjs.show == 'bar' ? 'icon-default': 'icon-secondary'}} fa fa-bar-chart icon-sm" ng-click="chartjs.show = 'bar'"></i>&nbsp; &nbsp;
+                                                        </span>
+                                                            <div class='graph-wrapper'>
+                                                                <div class="col-md-8 col-sm-8 col-xs-8 padding-right-0 {{chartjs.show == 'bar' ? 'showit': 'hideit'}}"  style="overflow:hidden;">
+                                                                    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-options="options" chart-colours="colours" style="width: 90% !important;height: 230px"></canvas>
+                                                                </div>
+                                                                <div class="col-md-8 col-sm-8 col-xs-8 padding-right-0 {{chartjs.show == 'line' ? 'showit': 'hideit'}}" style="overflow:hidden;">
+                                                                    <canvas id="line" class="chart chart-line" chart-data="data" chart-labels="labels" chart-options="options" chart-legend="false" chart-series="series" chart-click="onClick" chart-colours="colours" style="width: 90% !important;height: 230px">
+                                                                    </canvas>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+                                  </div>
+
+
+                            
+
+                           
+
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

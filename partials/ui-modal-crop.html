@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h4 class="modal-title">Choose your profile picture</h4>
+</div>
+<div class="modal-body">
+    <p>Select an image file: <input type="file" id="fileInput" onchange="angular.element(this).scope().cropProfilePic(this.files)"/></p>
+    <div class="cropArea">
+	    <img-crop area-type="square" image="myImage" result-image="myCroppedImage"></img-crop>
+    </div>
+    <hr>
+    <div class="preview-area">
+        <h4>Crop Preview</h4>
+        <div class="row">
+            <div class="col-lg-4">
+                <img ng-src="{{myCroppedImage}}"/>
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="modal-footer">                  
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="upoadProfilePic(myCroppedImage)">Crop</button>
+</div>

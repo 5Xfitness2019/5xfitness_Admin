@@ -1,0 +1,257 @@
+<div class='content-wrapper' ng-controller="RequestsCtrl" ng-init="app.settings.pagetitle = 'Request Details'; getuserList();" >
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    
+
+                   
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="col-sm-3" ng-click="pop()">Request Details :</h4>    
+                                    <div class="text-right col-sm-2 pull-right">
+                                            <button type="button" ng-click="cancel()" class="btn">Back</button>                                              
+                                        </div>
+                                    <div class="text-right col-sm-2 pull-right" ng-if="requestDetails.status == 'reassigned'">
+                                        <button type="button" ng-click="assignJob($event,requestDetails,'reassigned')" style="background:#bb1d2c !important" class="btn btn-primary ">Reassign</button>                                        
+                                    </div>
+                                    <div class="text-right col-sm-2 pull-right" ng-if="requestDetails.status == 'accepted'">
+                                        <button type="button" ng-click="assignJob($event,requestDetails,'')" style="background:#bb1d2c !important" class="btn btn-primary ">Assign</button>                                        
+                                    </div>
+
+                                    <div class="text-right col-sm-2 pull-right" >
+                                            <a href="#/app/invoice_details/{{requestDetails.request_id}}" style="background:#bb1d2c !important" class="btn btn-info" ng-if="requestDetails.invoice_count > 0">
+                                                Invoice Details
+                                            </a>
+                                            <a href="#/app/invoice_details/{{requestDetails.request_id}}" style="background:#bb1d2c !important" class="btn btn-info" ng-if="requestDetails.invoice_count == 0">
+                                                Send Invoice 
+                                            </a>
+
+
+                                    </div>
+
+                                   
+
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-4">Tenant  : </div>
+                                <div ng-if="requestDetails.owner_name" class="col-sm-8">{{requestDetails.owner_name}}</div>
+                                <div ng-if="!requestDetails.owner_name" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Email  :</div>
+                                <div ng-if="requestDetails.email" class="col-sm-8">{{requestDetails.email}}</div>
+                                <div ng-if="!requestDetails.email" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10" ng-if="previousstaff != ''">
+                                <div class="col-sm-4">Previous Staff :</div>
+                                <div ng-if="requestDetails.assigned_to" class="col-sm-8">{{previousstaff}}</div>
+                                <div ng-if="!requestDetails.assigned_to" class="col-sm-8">--</div>
+                            </div> 
+                            <div class="row margin-top-10" ng-if="requestDetails.status != 'pending' &&  requestDetails.status !='reassign'">
+                                <div class="col-sm-4">Assigned To :</div>
+                                <div ng-if="requestDetails.assigned_to " class="col-sm-8">{{requestDetails.assigned_to}}</div>
+                                <div ng-if="!requestDetails.assigned_to" class="col-sm-8">--</div>
+                            </div>    
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Complaint Type :</div>
+                                <div ng-if="requestDetails.complaint_type" class="col-sm-8">{{requestDetails.complaint_type}}</div>
+                                <div ng-if="!requestDetails.complaint_type" class="col-sm-8">--</div>
+                            </div>           
+
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Request Date :</div>
+                                <div ng-if="requestDetails.request_date" class="col-sm-8">{{requestDetails.request_date}}</div>
+                                <div ng-if="!requestDetails.request_date" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Property :</div>
+                                <div ng-if="requestDetails.property_name" class="col-sm-8">{{requestDetails.property_name}}</div>
+                                <div ng-if="!requestDetails.property_name" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Property Type :</div>
+                                <div ng-if="requestDetails.type_name" class="col-sm-8">{{requestDetails.type_name}} </div>
+                                <div ng-if="!requestDetails.type_name" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Property Sub Type :</div>
+                                <div class="col-sm-8" ng-if="requestDetails.subtype_name">{{requestDetails.subtype_name}}</div>
+                                <div ng-if="!requestDetails.subtype_name" class="col-sm-8">--</div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-sm-4">Description :</div>
+                                <div ng-if="requestDetails.description" class="col-sm-8">{{requestDetails.description}} </div>
+                                <div ng-if="!requestDetails.description" class="col-sm-8">--</div>
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <br>
+                            <br>
+
+                            <div class="clearfix"></div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-0" id="slides_control">
+                                    <div class="col-md-3" ng-if="requestDetails.video_url">
+                                            <video width="150" controls>
+                                                <source ng-src="{{getIframeSrc(requestDetails.video_url)}}" type="video/mp4">
+                                                Your browser does not support HTML5 video.
+                                            </video>
+                                        </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                
+                                <div class="col-md-12 col-sm-12 col-xs-12 padding-right-0" id="slides_control">
+                                        
+                                    
+
+
+                                <div class="col-md-3" ng-if="requestDetails.image1"><img class="img-rounded zoom" src="{{baseUrl}}{{requestDetails.image1}}" style="width:100%;"></div>
+                                <div class="col-md-3" ng-if="requestDetails.image2"><img class="img-rounded zoom" src="{{baseUrl}}{{requestDetails.image2}}" style="width:100%;"></div>
+                                <div class="col-md-3" ng-if="requestDetails.image3"><img class="img-rounded zoom" src="{{baseUrl}}{{requestDetails.image3}}" style="width:100%;"></div>
+
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                            <br>
+                            <div class="clearfix"></div>
+
+
+                            <br>
+                            
+
+
+                            <div class="clearfix"></div>
+                            <br>
+                            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-0">
+                                    <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>Technician Comments</h4>
+                                    <hr>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="comment in comments" >
+                                        <div class="row-fluid">
+                                            <div class="span2 col-md-2" >
+                                               
+                                            <img ng-if="comment.profile_image !='' && comment.profile_image != null" class="img-circle" ng-src="{{baseUrl}}{{comment.profile_image}}" alt="" style="width:75px;height:75px;">
+                                            <img ng-if="comment.profile_image =='' || comment.profile_image == null" class="img-circle" ng-src="{{baseUrl}}nouser.png" alt="">
+                                            </div>
+                                            <br>
+                                            
+                                            <div class="span8 col-md-10">
+                                                <h3>{{comment.first_name}} {{comment.last_name}}</h3>
+                                                <h4>{{comment.comments}}</h4>  
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-0" id="slides_control">
+                                                <div class="col-md-3" ng-if="comment.image1"><img class="img-rounded zoom" src="{{baseUrl}}{{comment.image1}}" style="width:100%;"></div>
+                                                <div class="col-md-3" ng-if="comment.image2"><img class="img-rounded zoom" src="{{baseUrl}}{{comment.image2}}" style="width:100%;"></div>
+                                                <div class="col-md-3" ng-if="comment.image3"><img class="img-rounded zoom" src="{{baseUrl}}{{comment.image3}}" style="width:100%;"></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <br>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 padding-right-0" id="slides_control">
+                                                <div class="col-md-3" ng-if="comment.video_url">
+                                                        <video width="150" controls>
+                                                            <source ng-src="{{getIframeSrc(comment.video_url)}}" type="video/mp4">
+                                                            Your browser does not support HTML5 video.
+                                                        </video>
+                                                    </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+
+
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                    </div>
+                            
+
+
+                   
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+    /**THE SAME CSS IS USED IN ALL 3 DEMOS**/    
+/**gallery margins**/  
+ul.gallery{    
+/*margin-left: 3vw;     
+margin-right:3vw;  */
+}    
+
+.zoom {      
+-webkit-transition: all 0.35s ease-in-out;    
+-moz-transition: all 0.35s ease-in-out;    
+transition: all 0.35s ease-in-out;     
+cursor: -webkit-zoom-in;      
+cursor: -moz-zoom-in;      
+cursor: zoom-in;  
+}     
+
+.zoom:hover,  
+.zoom:active,   
+.zoom:focus {
+/**adjust scale to desired size, 
+add browser prefixes**/
+-ms-transform: scale(2.5);    
+-moz-transform: scale(2.5);  
+-webkit-transform: scale(2.5);  
+-o-transform: scale(1.5);  
+transform: scale(1.5);    
+position:absolute;      
+z-index:9999999;  
+}
+
+/**To keep upscaled images visible on mobile, 
+increase left & right margins a bit**/  
+@media only screen and (max-width: 768px) {   
+ul.gallery {      
+margin-left: 15vw;       
+margin-right: 15vw;
+}
+
+/**TIP: Easy escape for touch screens,
+give gallery's parent container a cursor: pointer.**/
+.DivName {cursor: pointer}
+}
+    </style>

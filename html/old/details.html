@@ -1,0 +1,155 @@
+<div class='content-wrapper' ng-controller="PropertiesCtrl" ng-init="app.settings.pagetitle = 'User Property Details';  getpropertyTypes(); getproperty_details();">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                                    <div class="pull-left">
+                                        <h3>{{property_details.first_name}} {{property_details.last_name}}
+                                            <br>
+                                            <i style="font-size:16px;">{{property_details.email}}</i>
+                                        </h3>
+
+
+                                    </div>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-info saveBtn" ng-click="saveProperty()">Save</button>
+                                        <button type="button" ng-click="goback('app.properties')" class="btn">Back</button>
+                                    </div>
+                                    <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper"
+                                        ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                                        <p class="" ng-show="validationError1">{{validationError1}}</p>
+                                        <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <br>
+                            <h3>Property Details:</h3>
+                            <hr>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+
+                                        <label>Property Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="property_name" name="property_name" ng-model="property_details.property_name"
+                                                value="{{property_details.property_name}}" />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Address</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="address" name="address" ng-model="property_details.address" value="{{property_details.address}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>State</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="state" name="state" ng-model="property_details.state" value="{{property_details.state}} "
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container>
+                                        <label>Zipcode</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="zipcode" name="zipcode" ng-model="property_details.zipcode" value="{{property_details.zipcode}}"
+                                            />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6">
+                                    <!--<md-input-container>-->
+
+                                    <label>Property Type</label>
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="property_details.property_type" ng-change="getSubPropertyTypes(property_details.property_type);">
+                                            <option value="00">--Select--</option>
+                                            <option ng-repeat="prop in 
+                                            propertyTypes" value="{{prop.property_type_id}}">{{prop.type_name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--</md-input-container>-->
+                                </div>
+                                <div class="col-md-6">
+                                    <!--<md-input-container>-->
+                                    <label>Property SubType</label>
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="property_details.property_subtype">
+                                            <option value="">--Select--</option>
+                                            <option ng-repeat="prop in 
+                                            subPropertyTypes" value="{{prop.property_subtype_id}}">{{prop.subtype_name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--</md-input-container>-->
+                                </div>
+                            </div>
+
+                            <div class="row margin-top-10" ng-init="getuserList()">
+
+                                <div class="col-md-6">
+                                    <!--<md-input-container>-->
+                                    <label>Tenant</label>
+                                    <div class="form-group">
+                                        <select class="form-control" ng-model="property_details.member_id">
+                                            <option value="">--Select--</option>
+                                            <option ng-repeat="item in 
+                                                    users_list" ng-selected="item.member_id ==property_details.member_id "
+                                                value="{{item.member_id}}">{{item.first_name}} {{item.last_name}}</option>
+                                        </select>
+                                    </div>
+                                    <!--</md-input-container>-->
+                                </div>
+
+
+                                    <div class="col-md-12">
+                                        <!-- <label></label>
+                                        <div class="form-group">
+                                            <input type="file" name="file" id="uploadFilesPDF" onchange="angular.element(this).scope().uploadPropertyImage(this)"  style="display: none;"/>
+                                            <button id="uploadButton1" onclick="javascript: document.getElementById('uploadFilesPDF').click()" class="btn btn-primary btn-bok btn-sm" >Upload Property Image</button>
+                                            {{errorMsg1}}
+                                        </div> -->
+                                        <img src="{{property_details.property_image}}">
+
+                                        <div>Select an image file: <input type="file" id="fileInput" /></div>
+                                        <div class="cropArea">
+                                          <img-crop image="myImage" result-image="myCroppedImage" area-type="square"></img-crop>
+                                        </div>
+                                        <div>Cropped Image:</div>
+                                        <div><img src="{{myCroppedImage}}" /></div>
+
+                                        
+                                    </div>
+
+                                    
+                
+                                
+
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

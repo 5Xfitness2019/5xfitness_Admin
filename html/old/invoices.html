@@ -1,0 +1,84 @@
+
+<div class='content-wrapper' ng-controller="InvoicesCtrl" ng-init="app.settings.pagetitle = 'Invoice Management'; getInvoiceLists();">
+    <div class="col-lg-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Invoice Management</h2>
+            </header>
+            <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-8 col-md-8 col-sm-9 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+            </div>
+
+
+
+            
+            <div class="content-body padding-bottom-0">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                         <!-- <div class="col-lg-4 col-md-4" style="padding-right:0px;">
+                                <md-input-container style="width:100%">
+                                    <label>Search</label>
+                                    <input ng-model="search" my-enter="getRequestLists()">
+                                </md-input-container>                       
+                        </div>
+
+                        <div class="col-lg-3 col-md-3" style="padding-top:18px;padding-left:0px;">
+                            <select class="form-control" ng-model="search_status" ng-change="getRequestLists();" >
+                                <option value="">Select Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="inprogress">Inprogress</option>
+                                <option value="cancelled">Reassign Requests</option>
+                                <option value="completed">Completed</option>
+                            </select>  
+                        </div>
+                        <div class="col-lg-2 col-md-2" style="padding-top:12px;padding-left:0px;">
+                              <button class="btn btn-info sizeadBtn" ng-click="getRequestLists()">SEARCH</button>
+                        </div> -->
+
+                    </div>
+                </div>
+                <p ng-show="successMsg1">{{successMsg1}}</p>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <table class="table user-list table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><span>User Name</span></th>
+                                    <th><span>Property Name</span></th>
+                                    <th><span>Payment Type</span></th>
+                                    <th><span>Payment Status</span></th>
+                                    <th><span>Payment Date</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="property in invoice_list">
+                                    <td style="text-transform: capitalize;">{{property.first_name}} {{property.last_name}} </td>
+                                    <td style="text-transform: capitalize;">{{property.property_name}}</td>
+                                    <td style="text-transform: capitalize;">{{property.payment_type}} </td> 
+                                    <td style="text-transform: capitalize;" ng-if="property.payment_status!='' && property.payment_status!=Null">Paid</td>
+                                    <td style="text-transform: capitalize;" ng-if="property.payment_status=='' || property.payment_status==Null">Unpaid</td>
+                                    <td style="text-transform: capitalize;">{{property.created_date}}</td>
+                                    
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                        <p ng-show="validationError1">{{validationError1}}</p>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center padding-top-30 padding-bottom-30">
+
+
+                                    <!--<uib-pagination total-items="listcount" ng-model="currentPage" items-per-page="5" ng-change="pageChanged()">
+                                        
+                                    </uib-pagination>-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

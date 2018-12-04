@@ -1,0 +1,96 @@
+
+<div class='content-wrapper' ng-controller="WorkoutCtrl" ng-init="app.settings.pagetitle = 'Workouts'; getWorkouts();">
+        <div class="col-lg-12">
+            <section class="box ">
+                <header class="panel_header">
+                    <h2 class="title pull-left">Workouts</h2>
+                </header>
+                <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-8 col-md-8 col-sm-9 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+                </div>
+                <div class="content-body padding-bottom-0">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                             <div class="col-lg-4" >
+                                    <md-input-container style="width:100%">
+                                    <label>Search</label>
+                                    <!-- <input ng-model="search" ng-keyup="getCategories()" my-enter="getCategories()"> -->
+                                    <input ng-model="search"  my-enter="getWorkouts()">
+                                    </md-input-container>                       
+                            </div>
+                            <div class="col-lg-2 col-md-2" style="padding-top:12px;padding-left:0px;">
+                                  <button class="btn btn-info sizeadBtn" ng-click="getWorkouts()">SEARCH</button>
+                            </div>
+                             <div class="col-lg-2 pull-right"><a class="btn btn-info sizeadBtn"  href="#/app/workout_details/{{list.workout_id}}" class="table-link">
+                                  ADD</a>
+                             </div>
+                        </div>
+                    </div>
+                    <p ng-show="successMsg1">{{successMsg1}}</p>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <table class="table user-list table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><span>Workout</span></th>
+                                        <th><span>Sets</span></th>
+                                        <th><span>Image</span></th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="list in lists">
+                                            <td style="text-transform: capitalize;">{{list.workout_name}}</td>
+                                            <td style="text-transform: capitalize;">{{list.duration}}</td>
+                                            <td ><img src="{{apiUrl}}{{list.image_url}}" style="width:100px;"></td>
+                                        <!--<td> <span ng-show="property.status=='Y'"> Active
+                                                </span>
+                                                <span ng-show="property.status=='N'"> Inactive
+                                                </span>
+                                        </td>-->
+                                        
+                                        
+                                        <td style="width: 20%;">
+                                             
+                                            <a href="#/app/workout_details/{{list.workout_id}}" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="javascript:void(0)" ng-click="deleteWorkout(list)" class="table-link danger">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <!-- <a href="javascript:void(0)" ng-show="list.status=='Y'" ng-click="changeStatus(list,'N')" class="table-link danger">
+                                                <input type="button" class="btn" style="padding:0px 10px 0px 10px;background:#bb1d2c;color:#FFFFFF" value="Active">
+                                            </a>
+                                            <a href="javascript:void(0)" ng-show="list.status=='N'" ng-click="changeStatus(list,'Y')" class="table-link danger">
+                                                <input type="button" class="btn" style="padding:0px 10px 0px 10px;background:#da9797;color:#FFFFFF" value="In Active">
+                                            </a> -->
+                                            
+    
+    
+                                        </td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                            <p ng-show="validationError1">{{validationError1}}</p>
+     
+    
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center padding-top-30 padding-bottom-30">
+                                    <!-- <uib-pagination total-items="totDoctors" ng-model="curPage"></uib-pagination> -->
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    

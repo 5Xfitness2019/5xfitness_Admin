@@ -1,0 +1,58 @@
+<div class='content-wrapper' ng-controller="SettingsCtrl" ng-init="app.settings.pagetitle = 'Settings';getSettings() ">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-9 col-sm-8 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+                               
+                                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+
+                              
+                                <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+                                <p class=" pull-right" ng-show="validationError1">{{validationError1}}</p>
+                                <p  class=" pull-right" ng-show="successMsg1">{{successMsg1}}</p>
+                                </div>
+                            </div>
+                            </div>
+
+                            <br>
+                            <h3>Settings</h3>
+                                <hr>
+                            <div class="row margin-top-10">
+                                <div class="col-md-6" >
+                                     <md-input-container class="col-md-12 col-sm-12"> 
+
+                                    <label>Email</label>
+                                    <div class="form-group"  >
+                                        <input type="text" class="form-control"  ng-model="settingsData.admin_email"   />
+                                    </div>
+                                     </md-input-container>
+                                </div>
+
+                                
+                                
+                            </div>
+                           
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-primary" ng-click="updateSettings($event)">Save</button>
+                            </div>
+
+
+
+
+                            <div class="clearfix"></div>
+
+                            <hr>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

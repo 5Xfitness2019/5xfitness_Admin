@@ -1,0 +1,130 @@
+<div class='content-wrapper' ng-controller="DoctorsCtrl" ng-init="app.settings.pagetitle = 'Admin Profile Details'; AdminGetdetails();">
+    <div class="col-lg-12">
+        <section class="box nobox">
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-9 col-sm-8 col-xs-12 padding-left-0">
+                        <div class="uprofile-content padding-top-30">
+                            <div class="row">
+
+
+
+                                <!--<div class="pull-right">
+
+                                    <button type="button" ng-click="goback('app.specialist')" class="btn">Back</button>
+                                </div>-->
+
+
+
+                            </div>
+
+                            <br>
+                            <h3>Personal Information:</h3>
+                            <hr>
+                            <div class="row margin-top-10">
+                                <div class="col-md-5">
+                                    <md-input-container>
+
+                                        <label>First Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="first_name" name="first_name" ng-model="userdetails.first_name" value="{{userdetails.first_name}}"
+                                                   />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-5">
+                                    <md-input-container>
+                                        <label>Last Name</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="last_name" name="last_name" ng-model="userdetails.last_name" value="{{userdetails.last_name}}"
+                                                   />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col-md-5">
+                                    <md-input-container>
+                                        <label>Email</label>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="email" name="email" ng-model="userdetails.email" value="{{userdetails.email}} "
+                                                   />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                
+                            </div>
+
+                            <div class="">
+
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-primary" ng-click="updateuser($event)">Save</button>
+
+                                </div>
+                                <div ng-class="{'text-success': successMsg1, 'text-danger': validationError1}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper" ng-show="validationError1 || successMsg1">
+                                    <p class=" pull-right" ng-show="validationError1">{{validationError1}}</p>
+                                    <p  class=" pull-right" ng-show="successMsg1">{{successMsg1}}</p>
+                                </div>
+                            </div>
+
+
+
+                            <div class="clearfix"></div>
+
+
+
+                            <h3>Change Password</h3>
+
+                            <hr>
+
+                            <div class="row margin-top-12">
+                                <div class="col-md-4">
+                                    <md-input-container>
+
+                                        <label>Current Password</label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="current_password" name="current_password" ng-model="changePassFrom.current_password" value=""  />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-4">
+                                    <md-input-container>
+                                        <label>New password </label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password" name="password" ng-model="changePassFrom.password"    />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                 <div class="col-md-4">
+                                    <md-input-container>
+                                        <label>Confirm password </label>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" ng-model="changePassFrom.confirm_password"    />
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                               <div class="">
+
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-primary" ng-click="updateAccountInfo($event)">Change</button>
+
+                                </div>
+                                <div ng-class="{'text-success': successMsg2, 'text-danger': validationError2}" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper" ng-show="validationError2 || successMsg2">
+                                    <p class=" pull-right" ng-show="validationError2">{{validationError2}}</p>
+                                    <p  class=" pull-right" ng-show="successMsg2">{{successMsg2}}</p>
+                                </div>
+                                    <div class="clearfix"></div>
+                            </div>
+                            <br>
+                            
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

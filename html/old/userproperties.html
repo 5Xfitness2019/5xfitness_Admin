@@ -1,0 +1,67 @@
+
+<div class='content-wrapper' ng-controller="UserPropertiesCtrl" ng-init="app.settings.pagetitle = 'property lists'; getPropertyLists();getUserDetails();">
+    <div class="col-lg-12">
+        <section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Tenant Details</h2>
+            </header>
+           
+
+            
+            <div class="content-body padding-bottom-0">
+                    <div class="row">
+                        <div class="col-sm-4">Tenant  :</div>
+                        <div ng-if="userdetails.first_name" class="col-sm-8">{{userdetails.first_name}} {{userdetails.last_name}}</div>
+                        <div ng-if="!userdetails.first_name" class="col-sm-8">--</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Email  :</div>
+                        <div ng-if="userdetails.email" class="col-sm-8">{{userdetails.email}}</div>
+                        <div ng-if="!userdetails.email" class="col-sm-8">--</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">Address  :</div>
+                        <div ng-if="userdetails.address" class="col-sm-8">{{userdetails.address}}</div>
+                        <div ng-if="!userdetails.address" class="col-sm-8">--</div>
+                    </div>
+                   
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding:10px;">
+                        <div class="col-lg-2 col-md-2 pull-right"  >
+                            <a href="#/app/tenants" class="btn btn-info sizeadBtn"  >BACK
+                            </a>
+                        </div>
+                    </div>
+                   
+                </div><div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <table class="table user-list table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th><span>Property Name</span></th>
+                                    <th><span>Type</span></th>
+                                    <th><span>Sub Type</span></th>
+                                    <th><span>Address</span></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="property in property_list">
+                                    <td style="text-transform: capitalize;">{{property.property_name}}</td>
+                                    <td style="text-transform: capitalize;">{{property.type_name}}</td>
+                                    <td style="text-transform: capitalize;">{{property.subtype_name}}</td>
+                                    <td style="text-transform: capitalize;">{{property.address}}</td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                        <p ng-show="validationError1">{{validationError1}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

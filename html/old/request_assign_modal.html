@@ -1,0 +1,39 @@
+<div class='content-wrapper'>
+    <div class="col-lg-12">
+        <h3>Select Staff To Assign Job:</h3>
+        <hr>
+        <div class="content-body">
+            <div class="row margin-top-10">
+
+                <div class="col-md-12">
+                    <!--<md-input-container style="width:100%;">-->
+                        <label>Staff Lists</label>
+                        <div class="form-group">
+                            <select class="" ng-model="selmember_id"  style="width:100%;">
+                                <option value="">Select staff</option>
+                                <option ng-repeat="prop in 
+                                users_list" value="{{prop.member_id}}">{{prop.first_name}} {{prop.last_name}}</option>
+                            </select>  
+                        </div>
+                    <!--</md-input-container>-->
+                </div>
+               
+
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-bottom-30 ">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-info saveBtn" ng-disabled="clicked" ng-click="saveAssignJob(requestDetails,selmember_id,reassigned)" >Save</button>
+                        <button type="button" ng-click="closeModal()" class="btn">Back</button>
+                    </div>
+                    <div ng-class="{'text-success alert alert-success': successMsg1, 'text-danger alert alert-danger': validationError1}" 
+                    class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wrapper" ng-show="validationError1 || successMsg1" style="margin-top:5px;">
+                        <p class="" ng-show="validationError1">{{validationError1}}</p>
+                        <p class="" ng-show="successMsg1">{{successMsg1}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
